@@ -38,14 +38,14 @@ function Player:update()
           " Position: " .. playdate.getCrankPosition())
 
 local a = playdate.getCrankPosition()
-          local snapped = (math.floor((a + 45) / 90) % 4) * 90  -- 0,90,180,270
+local snapped = (math.floor((a + 45) / 90) % 4) * 90  -- 0,90,180,270
           
-          local imgs = {
-            [0]   = self.image0,
-            [90]  = self.image90,
-            [180] = self.image180,
-            [270] = self.image270,
-          }
+local imgs = {
+    [0]   = self.image0,
+    [90]  = self.image90,
+    [180] = self.image180,
+    [270] = self.image270,
+}
           
-          self:setImage(imgs[snapped])
+self:setImage(imgs[snapped])
 end
