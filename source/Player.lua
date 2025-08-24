@@ -1,12 +1,22 @@
 local gfx = playdate.graphics
+local X_MOV = 2
+local Y_MOV = 2
 
 class("Player").extends(gfx.sprite)
 
 function Player:init()
-    local image = gfx.image.new("images/rotowarrior0.png")
-    assert(image, "image not found!")
+    -- store on self so other methods can access them
+    self.image0   = gfx.image.new("images/rotowarrior0.png")
+    self.image90  = gfx.image.new("images/rotowarrior90.png")
+    self.image180 = gfx.image.new("images/rotowarrior180.png")
+    self.image270 = gfx.image.new("images/rotowarrior270.png")
 
-    self:setImage(image)
+    assert(self.image0,   "image0 not found!")
+    assert(self.image90,  "image90 not found!")
+    assert(self.image180, "image180 not found!")
+    assert(self.image270, "image270 not found!")
+
+    self:setImage(self.image0)
     self:setCenter(0.5, 0.5)
     self:moveTo(200, 200)
     self:add()
@@ -14,10 +24,28 @@ end
 
 function Player:update()
     local dx, dy = 0, 0
-    if playdate.buttonIsPressed(playdate.kButtonUp) then dy -= 2 end
-    if playdate.buttonIsPressed(playdate.kButtonDown) then dy += 2 end
-    if playdate.buttonIsPressed(playdate.kButtonLeft) then dx -= 2 end
-    if playdate.buttonIsPressed(playdate.kButtonRight) then dx += 2 end
+
+    -- Lua: no += / -=
+    if playdate.buttonIsPressed(playdate.kButtonUp)    then dy = dy - Y_MOV end
+    if playdate.buttonIsPressed(playdate.kButtonDown)  then dy = dy + Y_MOV end
+    if playdate.buttonIsPressed(playdate.kButtonLeft)  then dx = dx - X_MOV end
+    if playdate.buttonIsPressed(playdate.kButtonRight) then dx = dx + X_MOV end
 
     self:moveBy(dx, dy)
+
+    -- debug print (typo fixed)
+    print("getCrankChange: " .. playdate.getCrankChange() ..
+          " Position: " .. playdate.getCrankPosition())
+
+local a = playdate.getCrankPosition()
+          local snapped = (math.floor((a + 45) / 90) % 4) * 90  -- 0,90,180,270
+          
+          local imgs = {
+            [0]   = self.image0,
+            [90]  = self.image90,
+            [180] = self.image180,
+            [270] = self.image270,
+          }
+          
+          self:setImage(imgs[snapped])
 end
