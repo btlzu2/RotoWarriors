@@ -1,6 +1,7 @@
 local gfx = playdate.graphics
-local X_MOV = 2
-local Y_MOV = 2
+local X_MOV = 3
+local Y_MOV = 3
+local playerRotation = 0
 
 class("Player").extends(gfx.sprite)
 
@@ -38,7 +39,7 @@ function Player:update()
           " Position: " .. playdate.getCrankPosition())
 
 local a = playdate.getCrankPosition()
-local snapped = (math.floor((a + 45) / 90) % 4) * 90  -- 0,90,180,270
+playerRotation = (math.floor((a + 45) / 90) % 4) * 90  -- 0,90,180,270
           
 local imgs = {
     [0]   = self.image0,
@@ -47,5 +48,9 @@ local imgs = {
     [270] = self.image270,
 }
           
-self:setImage(imgs[snapped])
+self:setImage(imgs[playerRotation])
+end
+
+function Player:getRotation()
+    return playerRotation
 end
