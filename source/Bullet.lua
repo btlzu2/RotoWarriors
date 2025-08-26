@@ -21,7 +21,6 @@ end
 
 function Bullet:update()
     self:moveBy(self.dx, self.dy)
-
     -- Remove the bullet if it's off screen
     local x, y = self:getPosition()
     if x < -10 or x > 410 or y < -10 or y > 250 then

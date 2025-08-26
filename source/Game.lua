@@ -1,9 +1,13 @@
 import "source/Player"
 import "source/Bullet"
+
+
 Game = {}
 
 local gfx = playdate.graphics
 local player
+local snd = playdate.sound
+local pew = snd.sampleplayer.new("sounds/pew.wav")
 
 function Game:update()
     if not player then
@@ -17,8 +21,8 @@ if playdate.buttonJustPressed(playdate.kButtonA) then
     
         local dx = math.cos(radians) * speed
         local dy = math.sin(radians) * speed
-    
         Bullet(px, py, dx, dy)
+        pew:play()
     end
     gfx.sprite.update()
     playdate.timer.updateTimers()
