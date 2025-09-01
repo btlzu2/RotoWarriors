@@ -7,10 +7,10 @@ class("Player").extends(gfx.sprite)
 
 function Player:init()
     -- store on self so other methods can access them
-    self.image0   = gfx.image.new("images/rotowarrior0.png")
-    self.image90  = gfx.image.new("images/rotowarrior90.png")
-    self.image180 = gfx.image.new("images/rotowarrior180.png")
-    self.image270 = gfx.image.new("images/rotowarrior270.png")
+    self.image0   = gfx.image.new("assets/images/rotowarrior0.png")
+    self.image90  = gfx.image.new("assets/images/rotowarrior90.png")
+    self.image180 = gfx.image.new("assets/images/rotowarrior180.png")
+    self.image270 = gfx.image.new("assets/images/rotowarrior270.png")
 
     assert(self.image0,   "image0 not found!")
     assert(self.image90,  "image90 not found!")
@@ -33,10 +33,6 @@ function Player:update()
     if playdate.buttonIsPressed(playdate.kButtonRight) then dx = dx + X_MOV end
 
     self:moveBy(dx, dy)
-
-    -- debug print (typo fixed)
-    print("getCrankChange: " .. playdate.getCrankChange() ..
-          " Position: " .. playdate.getCrankPosition())
 
 local a = playdate.getCrankPosition()
 playerRotation = (math.floor((a + 45) / 90) % 4) * 90  -- 0,90,180,270

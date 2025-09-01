@@ -1,0 +1,32 @@
+{
+  // Tell LuaLS which Lua runtime we're targeting.
+  // Playdate uses Lua 5.4 under the hood.
+  "Lua.runtime.version": "Lua 5.4",
+
+  // Paths that LuaLS should treat as part of the project "library".
+  // This is how it will learn about CoreLibs and your own stubs.
+  "Lua.workspace.library": [
+    "${workspaceFolder}",                 // your project
+    "/Users/robjohnson/Developer/PlaydateSDK/CoreLibs", // Playdate CoreLibs
+    "${workspaceFolder}/tools/stubs"      // optional: your own stubs
+  ],
+
+  // Module resolution patterns.
+  // This makes `import "CoreLibs/...“` resolve cleanly.
+  "Lua.runtime.path": [
+    "?.lua",
+    "?/init.lua",
+    "/Users/robjohnson/Developer/PlaydateSDK/CoreLibs/?.lua",
+    "/Users/robjohnson/Developer/PlaydateSDK/CoreLibs/?/init.lua"
+  ],
+
+  // Globals provided by Playdate that don’t exist in standard Lua.
+  "Lua.diagnostics.globals": [
+    "playdate",
+    "import",
+    "class"
+  ],
+
+  // Don’t bug us about “detected third-party library, do you want to enable?”
+  "Lua.workspace.checkThirdParty": false
+}

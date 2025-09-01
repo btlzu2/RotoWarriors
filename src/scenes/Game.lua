@@ -1,5 +1,5 @@
-import "source/Player"
-import "source/Bullet"
+import "src/entities/Player"
+import "src/entities/Bullet"
 
 
 Game = {}
@@ -7,7 +7,7 @@ Game = {}
 local gfx = playdate.graphics
 local player
 local snd = playdate.sound
-local pew = snd.sampleplayer.new("sounds/pew.wav")
+local pew = snd.sampleplayer.new("assets/sounds/pew.wav")
 
 function Game:update()
     if not player then
@@ -15,6 +15,7 @@ function Game:update()
     end
 if playdate.buttonJustPressed(playdate.kButtonA) then
         local px, py = player:getPosition()
+        print ("PX" .. px .. " PY " .. py)
         local angle = player:getRotation() -- assuming you're storing this in degrees
         local radians = math.rad(angle)
         local speed = 5

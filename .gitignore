@@ -1,3 +1,12 @@
-.nova/
-*.pdx
+# macOS
+.DS_Store
+
+# Playdate
 build/
+*.pdx
+*.pdx.zip
+
+# Editors
+.vscode/
+.idea/
+.nova/
