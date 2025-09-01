@@ -72,7 +72,7 @@ import "src/entities/player"
 -- ❌ Incorrect
 import "src/scenes/Game"
 import "src/entities/Player"
-
+```
 ## 4. Commit Messages
 
 Use [Conventional Commits](https://www.conventionalcommits.org/) to keep history clear.
