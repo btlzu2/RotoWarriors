@@ -7,7 +7,7 @@ local pd  <const> = playdate
 local gfx <const> = playdate.graphics
 
 import "src/scene_manager"
-import "src/scenes/Game"
+import "src/scenes/game"
 
 -- start directly in the game
 SceneManager:switch(GameScene)
