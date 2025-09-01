@@ -103,7 +103,7 @@ ASSETS = {
   images = "assets/images/",
   sounds = "assets/sounds/"
 }
-
+```
 ## 7. Small, Descriptive Commits
 
 Add one feature or fix per commit.  
