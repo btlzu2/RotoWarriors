@@ -1,4 +1,3 @@
--- main.lua
 import "CoreLibs/object"
 import "CoreLibs/graphics"
 import "CoreLibs/sprites"
@@ -8,13 +7,13 @@ local pd  <const> = playdate
 local gfx <const> = playdate.graphics
 
 import "src/scene_manager"
-import "src/scenes/Game"     -- your existing game, refactored into a scene
+import "src/scenes/Game"
 
--- Start directly in the game scene (no menu yet)
+-- start directly in the game
 SceneManager:switch(GameScene)
 
 function pd.update()
   pd.timer.updateTimers()
-  SceneManager:update()      -- run the active scene
-  gfx.sprite.update()        -- if you use sprites
+  SceneManager:update()
+  gfx.sprite.update()
 end

@@ -1,5 +1,5 @@
--- src/scene_manager.lua
-local SceneManager = { current = nil }
+-- GLOBAL on purpose so import makes it visible
+SceneManager = { current = nil }
 
 function SceneManager:switch(scene)
   self.current = scene
@@ -7,9 +7,5 @@ function SceneManager:switch(scene)
 end
 
 function SceneManager:update()
-  if self.current and self.current.update then
-    self.current:update()
-  end
+  if self.current and self.current.update then self.current:update() end
 end
-
-return SceneManager
