@@ -1,30 +1,32 @@
-local gfx = playdate.graphics
+import "CoreLibs/object"
+import "CoreLibs/graphics"
+import "CoreLibs/sprites"
 
-class('Bullet').extends(gfx.sprite)
+local pd  <const> = playdate
+local gfx <const> = pd.graphics
 
-function Bullet:init(x, y, dx, dy)
-    Bullet.super.init(self)
+class("Bullet").extends(gfx.sprite)
 
-    self:setSize(4, 4) -- small bullet size
-    local bulletImage = gfx.image.new(4, 4)
-    gfx.pushContext(bulletImage)
-    gfx.fillCircleAtPoint(2, 2, 2) -- simple circle bullet
-    gfx.popContext()
-    self:setImage(bulletImage)
-
+function Bullet:init(x, y, angleDeg)
+    -- tiny 4×4 black dot for now
+    local img = gfx.image.new(4, 4, gfx.kColorBlack)
+    self:setImage(img)
+    self:setCenter(0.5, 0.5)
     self:moveTo(x, y)
-    self.dx = dx
-    self.dy = dy
-
     self:add()
+
+    -- speed + velocity components
+    local speed = 6
+    local rad = math.rad(angleDeg)
+    self.vx = math.cos(rad) * speed
+    self.vy = math.sin(rad) * speed
 end
 
 function Bullet:update()
-    self:moveBy(self.dx, self.dy)
-    -- Remove the bullet if it's off screen
-    local x, y = self:getPosition()
-    y = y - 32
-    x = x - 32
+    self:moveBy(self.vx, self.vy)
+
+    -- remove if it goes off screen
+    local x, y = self.x, self.y
     if x < -10 or x > 410 or y < -10 or y > 250 then
         self:remove()
     end
